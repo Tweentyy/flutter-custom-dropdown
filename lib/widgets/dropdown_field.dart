@@ -82,16 +82,26 @@ class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownF
   }
 
   Widget defaultHeaderBuilder({T? oneItem, List<T>? itemList}) {
-    return Text(
-      itemList != null ? itemList.join(', ') : oneItem?.label ?? '',
-      maxLines: widget.maxLines,
-      overflow: TextOverflow.ellipsis,
-      style: widget.headerStyle ??
-          TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-            color: widget.enabled ? null : Colors.black.withOpacity(.5),
+    return Row(
+      children: [
+        if (oneItem?.icon != null) ...[
+          Icon(oneItem!.icon),
+          const SizedBox(width: 8),
+        ],
+        Expanded(
+          child: Text(
+            itemList != null ? itemList.map((e) => e.label).join(', ') : oneItem?.label ?? '',
+            maxLines: widget.maxLines,
+            overflow: TextOverflow.ellipsis,
+            style: widget.headerStyle ??
+                TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                  color: widget.enabled ? null : Colors.black.withOpacity(.5),
+                ),
           ),
+        ),
+      ],
     );
   }
 

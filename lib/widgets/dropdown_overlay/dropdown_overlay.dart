@@ -124,11 +124,21 @@ class _DropdownOverlayState<T extends CustomDropDownItem> extends State<_Dropdow
     return Row(
       children: [
         Expanded(
-          child: Text(
-            result.label,
-            maxLines: widget.maxLines,
-            overflow: TextOverflow.ellipsis,
-            style: widget.listItemStyle ?? const TextStyle(fontSize: 16),
+          child: Row(
+            children: [
+              if (result.icon != null) ...[
+                Icon(result.icon),
+                const SizedBox(width: 8),
+              ],
+              Expanded(
+                child: Text(
+                  result.label,
+                  maxLines: widget.maxLines,
+                  overflow: TextOverflow.ellipsis,
+                  style: widget.listItemStyle ?? const TextStyle(fontSize: 16),
+                ),
+              ),
+            ],
           ),
         ),
         if (widget.dropdownType == _DropdownType.multipleSelect)
@@ -153,15 +163,25 @@ class _DropdownOverlayState<T extends CustomDropDownItem> extends State<_Dropdow
   }
 
   Widget defaultHeaderBuilder(BuildContext context, {T? item, List<T>? items}) {
-    return Text(
-      items != null ? items.join(', ') : item?.label ?? '',
-      maxLines: widget.maxLines,
-      overflow: TextOverflow.ellipsis,
-      style: widget.headerStyle ??
-          const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
+    return Row(
+      children: [
+        if (item?.icon != null) ...[
+          Icon(item!.icon),
+          const SizedBox(width: 8),
+        ],
+        Expanded(
+          child: Text(
+            items != null ? items.map((e) => e.label).join(', ') : item?.label ?? '',
+            maxLines: widget.maxLines,
+            overflow: TextOverflow.ellipsis,
+            style: widget.headerStyle ??
+                const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+          )
+        ),
+      ],
     );
   }
 
