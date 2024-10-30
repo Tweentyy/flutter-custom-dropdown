@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:animated_custom_dropdown_example/models/job.dart';
 import 'package:flutter/material.dart';
 
@@ -14,7 +15,7 @@ class MultiSelectControllerDropdown extends StatefulWidget {
 
 class _MultiSelectControllerDropdownState
     extends State<MultiSelectControllerDropdown> {
-  final controller = MultiSelectController<Job>([]);
+  final controller = MultiSelectController<CustomDropDownItem>([]);
 
   @override
   void dispose() {
@@ -27,7 +28,7 @@ class _MultiSelectControllerDropdownState
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        CustomDropdown<Job>.multiSelect(
+        CustomDropdown.multiSelect(
           multiSelectController: controller,
           hintText: 'Select job role',
           items: jobItems,
@@ -48,7 +49,7 @@ class _MultiSelectControllerDropdownState
             ),
           ),
           onListChanged: (value) {
-            log('MultiSelectControllerDropdown onChanged value: $value');
+            log('MultiSelectControllerDropdown onChanged value: ${value.map((e) => e.label)}');
           },
         ),
         const SizedBox(height: 8),

@@ -2,6 +2,7 @@ library animated_custom_dropdown;
 
 import 'dart:async';
 
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -45,7 +46,7 @@ const _defaultErrorStyle = TextStyle(
   height: 0.5,
 );
 
-class CustomDropdown<T> extends StatefulWidget {
+class CustomDropdown<T extends CustomDropDownItem> extends StatefulWidget {
   /// The list of items user can select.
   final List<T>? items;
 
@@ -504,7 +505,7 @@ class CustomDropdown<T> extends StatefulWidget {
   State<CustomDropdown<T>> createState() => _CustomDropdownState<T>();
 }
 
-class _CustomDropdownState<T> extends State<CustomDropdown<T>> {
+class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDropdown<T>> {
   final layerLink = LayerLink();
   late SingleSelectController<T?> selectedItemNotifier;
   late MultiSelectController<T> selectedItemsNotifier;

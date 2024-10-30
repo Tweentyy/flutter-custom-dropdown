@@ -1,6 +1,6 @@
 part of '../../../custom_dropdown.dart';
 
-class _SearchField<T> extends StatefulWidget {
+class _SearchField<T extends CustomDropDownItem> extends StatefulWidget {
   final List<T> items;
   final ValueChanged<List<T>> onSearchedItems;
   final String searchHintText;
@@ -38,7 +38,7 @@ class _SearchField<T> extends StatefulWidget {
   State<_SearchField<T>> createState() => _SearchFieldState<T>();
 }
 
-class _SearchFieldState<T> extends State<_SearchField<T>> {
+class _SearchFieldState<T extends CustomDropDownItem> extends State<_SearchField<T>> {
   final searchCtrl = TextEditingController();
   bool isFieldEmpty = false;
   FocusNode focusNode = FocusNode();
@@ -66,7 +66,7 @@ class _SearchFieldState<T> extends State<_SearchField<T>> {
         if (item is CustomDropdownListFilter) {
           return item.filter(query);
         } else {
-          return item.toString().toLowerCase().contains(query.toLowerCase());
+          return item.label.toLowerCase().contains(query.toLowerCase());
         }
       },
     ).toList();

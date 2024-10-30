@@ -1,13 +1,14 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 
-const List<String> _list = [
-  'Developer',
-  'Designer',
-  'Consultant',
-  'Student',
+List<CustomDropDownItem> _list = [
+  CustomDropDownItem(value: 'Developer', label: 'Developer', icon: Icons.developer_mode),
+  CustomDropDownItem(value: 'Designer', label: 'Designer', icon: null),
+  CustomDropDownItem(value: 'Consultant', label: 'Consultant', icon: null),
+  CustomDropDownItem(value: 'Student', label: 'Student', icon: Icons.school),
 ];
 
 class SimpleDropdown extends StatelessWidget {
@@ -15,13 +16,13 @@ class SimpleDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<String>(
+    return CustomDropdown(
       hintText: 'Select job role',
       items: _list,
       initialItem: _list[0],
       excludeSelected: false,
       onChanged: (value) {
-        log('SimpleDropdown onChanged value: $value');
+        log('SimpleDropdown onChanged value: ${value?.label}');
       },
     );
   }

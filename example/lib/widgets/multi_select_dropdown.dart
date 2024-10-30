@@ -9,11 +9,11 @@ class MultiSelectDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<Job>.multiSelect(
+    return CustomDropdown.multiSelect(
       items: jobItems,
       initialItems: jobItems.take(2).toList(),
       onListChanged: (value) {
-        log('MultiSelectDropdown onChanged value: $value');
+        log('MultiSelectDropdown onChanged value: ${value.map((e) => e.label)}');
       },
     );
   }

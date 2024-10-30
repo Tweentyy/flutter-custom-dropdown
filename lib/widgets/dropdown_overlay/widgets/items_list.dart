@@ -1,6 +1,6 @@
 part of '../../../custom_dropdown.dart';
 
-class _ItemsList<T> extends StatelessWidget {
+class _ItemsList<T extends CustomDropDownItem> extends StatelessWidget {
   final ScrollController scrollController;
   final T? selectedItem;
   final List<T> items, selectedItems;

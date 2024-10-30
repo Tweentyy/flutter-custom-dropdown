@@ -16,12 +16,12 @@ class ValidationDropdown extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown<Job>(
+          CustomDropdown(
             hintText: 'Select job role',
             items: jobItems,
             excludeSelected: false,
             onChanged: (value) {
-              log('ValidationDropdown onChanged value: $value');
+              log('ValidationDropdown onChanged value: ${value?.label}');
             },
             validator: (value) {
               if (value == null) {
@@ -63,11 +63,11 @@ class MultiSelectValidationDropdown extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown<Job>.multiSelect(
+          CustomDropdown.multiSelect(
             hintText: 'Select job role',
             items: jobItems,
             onListChanged: (value) {
-              log('MultiSelectValidationDropdown onChanged value: $value');
+              log('MultiSelectValidationDropdown onChanged value: ${value.map((e) => e.label)}');
             },
             listValidator: (value) {
               if (value.isEmpty) {

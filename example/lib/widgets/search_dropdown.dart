@@ -1,15 +1,16 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 
-const _list = [
-  'Pakistani',
-  'Indian',
-  'Middle Eastern',
-  'Western',
-  'Chinese',
-  'Italian',
+List<CustomDropDownItem> _list = [
+  CustomDropDownItem(value: 'pakistani', label: 'Pakistani'),
+  CustomDropDownItem(value: 'indian', label: 'Indian'),
+  CustomDropDownItem(value: 'middle_eastern', label: 'Middle Eastern'),
+  CustomDropDownItem(value: 'western', label: 'Western'),
+  CustomDropDownItem(value: 'chinese', label: 'Chinese'),
+  CustomDropDownItem(value: 'italian', label: 'Italian'),
 ];
 
 class SearchDropdown extends StatefulWidget {
@@ -20,17 +21,17 @@ class SearchDropdown extends StatefulWidget {
 }
 
 class _SearchDropdownState extends State<SearchDropdown> {
-  String? selectedItem = _list[2];
+  CustomDropDownItem? selectedItem = _list[2];
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<String>.search(
+    return CustomDropdown.search(
       hintText: 'Select cuisines',
       items: _list,
       initialItem: selectedItem,
       overlayHeight: 342,
       onChanged: (value) {
-        log('SearchDropdown onChanged value: $value');
+        log('SearchDropdown onChanged value: ${value?.label}');
         setState(() {
           selectedItem = value;
         });
@@ -44,11 +45,11 @@ class MultiSelectSearchDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<String>.multiSelectSearch(
+    return CustomDropdown.multiSelectSearch(
       hintText: 'Select cuisines',
       items: _list,
       onListChanged: (value) {
-        log('MultiSelectSearchDropdown onChanged value: $value');
+        log('MultiSelectSearchDropdown onChanged value: ${value.map((e) => e.label)}');
       },
     );
   }

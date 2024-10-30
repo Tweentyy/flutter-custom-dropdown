@@ -10,7 +10,7 @@ class DecoratedDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<Job>.search(
+    return CustomDropdown.search(
       items: jobItems,
       initialItem: jobItems[2],
       hintText: 'Select job role',
@@ -19,11 +19,11 @@ class DecoratedDropdown extends StatelessWidget {
       hideSelectedFieldWhenExpanded: true,
       closedHeaderPadding: const EdgeInsets.all(20),
       onChanged: (value) {
-        log('DecoratedDropdown onChanged value: $value');
+        log('DecoratedDropdown onChanged value: ${value?.label}');
       },
       headerBuilder: (context, selectedItem, enabled) {
         return Text(
-          selectedItem.toString(),
+          selectedItem.label,
           style: const TextStyle(
             color: Colors.white,
             fontSize: 18,
@@ -33,7 +33,7 @@ class DecoratedDropdown extends StatelessWidget {
       },
       listItemBuilder: (context, item, isSelected, onItemSelect) {
         return Text(
-          item.toString(),
+          item.label,
           style: const TextStyle(color: Colors.white, fontSize: 16),
         );
       },
@@ -98,13 +98,13 @@ class MultiSelectDecoratedDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown<Job>.multiSelectSearch(
+    return CustomDropdown.multiSelectSearch(
       items: jobItems,
       hintText: 'Select job role',
       searchHintText: 'Search job role',
       closedHeaderPadding: const EdgeInsets.all(20),
       onListChanged: (value) {
-        log('MultiSelectDecoratedDropdown onChanged value: $value');
+        log('MultiSelectDecoratedDropdown onChanged value: ${value.map((e) => e.label)}');
       },
       maxlines: 2,
       listItemBuilder: (context, item, isSelected, onItemSelect) {
@@ -112,7 +112,7 @@ class MultiSelectDecoratedDropdown extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              item.toString(),
+              item.label,
               style: const TextStyle(color: Colors.white, fontSize: 16),
             ),
             CupertinoCheckbox(

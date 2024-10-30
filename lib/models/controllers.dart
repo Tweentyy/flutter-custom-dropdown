@@ -1,7 +1,7 @@
 part of '../custom_dropdown.dart';
 
-class SingleSelectController<T> extends ValueNotifier<T?> {
-  SingleSelectController(super._value);
+class SingleSelectController<T extends CustomDropDownItem?> extends ValueNotifier<T?> {
+  SingleSelectController(super.value);
 
   void clear() {
     value = null;
@@ -10,7 +10,7 @@ class SingleSelectController<T> extends ValueNotifier<T?> {
   bool get hasValue => value != null;
 }
 
-class MultiSelectController<T> extends ValueNotifier<List<T>> {
+class MultiSelectController<T extends CustomDropDownItem> extends ValueNotifier<List<T>> {
   MultiSelectController(super.value);
 
   void add(T valueToAdd) {

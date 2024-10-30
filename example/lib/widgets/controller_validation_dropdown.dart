@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:animated_custom_dropdown_example/models/job.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class ControllerValidationDropdown extends StatefulWidget {
 class _ControllerValidationDropdownState
     extends State<ControllerValidationDropdown> {
   final formKey = GlobalKey<FormState>();
-  final controller = SingleSelectController<Job>(jobItems[0]);
+  final controller = SingleSelectController<CustomDropDownItem>(jobItems[0]);
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +25,12 @@ class _ControllerValidationDropdownState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown<Job>(
+          CustomDropdown(
             controller: controller,
             hintText: 'Select job role',
             items: jobItems,
             onChanged: (value) {
-              log('ControllerValidationDropdown onChanged value: $value');
+              log('ControllerValidationDropdown onChanged value: ${value?.label}');
             },
             validator: (value) {
               if (value == null) {

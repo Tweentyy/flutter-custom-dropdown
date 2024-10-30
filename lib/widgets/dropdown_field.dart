@@ -6,7 +6,7 @@ const _defaultOverlayIconDown = Icon(
   size: 20,
 );
 
-class _DropDownField<T> extends StatefulWidget {
+class _DropDownField<T extends CustomDropDownItem> extends StatefulWidget {
   final VoidCallback onTap;
   final SingleSelectController<T?> selectedItemNotifier;
   final String hintText;
@@ -52,7 +52,7 @@ class _DropDownField<T> extends StatefulWidget {
   State<_DropDownField<T>> createState() => _DropDownFieldState<T>();
 }
 
-class _DropDownFieldState<T> extends State<_DropDownField<T>> {
+class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownField<T>> {
   T? selectedItem;
   late List<T> selectedItems;
 
@@ -83,7 +83,7 @@ class _DropDownFieldState<T> extends State<_DropDownField<T>> {
 
   Widget defaultHeaderBuilder({T? oneItem, List<T>? itemList}) {
     return Text(
-      itemList != null ? itemList.join(', ') : oneItem.toString(),
+      itemList != null ? itemList.join(', ') : oneItem?.label ?? '',
       maxLines: widget.maxLines,
       overflow: TextOverflow.ellipsis,
       style: widget.headerStyle ??

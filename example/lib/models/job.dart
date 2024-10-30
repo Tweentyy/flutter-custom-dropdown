@@ -1,26 +1,10 @@
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 
-const List<Job> jobItems = [
-  Job('Developer', Icons.developer_mode),
-  Job('Designer', Icons.design_services),
-  Job('Consultant', Icons.account_balance),
-  Job('Student', Icons.school),
+List<CustomDropDownItem> jobItems = [
+  CustomDropDownItem(value: 'developer', label:'Developer', icon: Icons.developer_mode),
+  CustomDropDownItem(value: 'designer', label:'Designer', icon: Icons.design_services),
+  CustomDropDownItem(value: 'consultant', label:'Consultant', icon: Icons.account_balance),
+  CustomDropDownItem(value: 'student', label:'Student', icon: Icons.school)
 ];
-
-class Job with CustomDropdownListFilter {
-  final String name;
-  final IconData icon;
-
-  const Job(this.name, this.icon);
-
-  @override
-  String toString() {
-    return name;
-  }
-
-  @override
-  bool filter(String query) {
-    return name.toLowerCase().contains(query.toLowerCase());
-  }
-}

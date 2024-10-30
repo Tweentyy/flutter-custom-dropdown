@@ -12,7 +12,7 @@ const _defaultOverlayShadowOffset = Offset(0, 6);
 const _defaultListItemPadding =
     EdgeInsets.symmetric(vertical: 12, horizontal: 16);
 
-class _DropdownOverlay<T> extends StatefulWidget {
+class _DropdownOverlay<T extends CustomDropDownItem> extends StatefulWidget {
   final List<T> items;
   final ScrollController? itemsScrollCtrl;
   final SingleSelectController<T?> selectedItemNotifier;
@@ -81,7 +81,7 @@ class _DropdownOverlay<T> extends StatefulWidget {
   _DropdownOverlayState<T> createState() => _DropdownOverlayState<T>();
 }
 
-class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
+class _DropdownOverlayState<T extends CustomDropDownItem> extends State<_DropdownOverlay<T>> {
   bool displayOverly = true, displayOverlayBottom = true;
   bool isSearchRequestLoading = false;
   bool? mayFoundSearchRequestResult;
@@ -125,7 +125,7 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
       children: [
         Expanded(
           child: Text(
-            result.toString(),
+            result.label,
             maxLines: widget.maxLines,
             overflow: TextOverflow.ellipsis,
             style: widget.listItemStyle ?? const TextStyle(fontSize: 16),
@@ -154,7 +154,7 @@ class _DropdownOverlayState<T> extends State<_DropdownOverlay<T>> {
 
   Widget defaultHeaderBuilder(BuildContext context, {T? item, List<T>? items}) {
     return Text(
-      items != null ? items.join(', ') : item.toString(),
+      items != null ? items.join(', ') : item?.label ?? '',
       maxLines: widget.maxLines,
       overflow: TextOverflow.ellipsis,
       style: widget.headerStyle ??
