@@ -619,109 +619,113 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
               border: InputBorder.none,
               contentPadding: EdgeInsets.zero,
             ),
-            child: _OverlayBuilder(
-              overlayPortalController: widget.overlayController,
-              visibility: widget.visibility,
-              overlay: (size, hideCallback) {
-                return _DropdownOverlay<T>(
-                  onItemSelect: (T value) {
-                    switch (widget._dropdownType) {
-                      case _DropdownType.singleSelect:
-                        selectedItemNotifier.value = value;
-                      case _DropdownType.multipleSelect:
-                        final currentVal = selectedItemsNotifier.value.toList();
-                        if (currentVal.contains(value)) {
-                          currentVal.remove(value);
-                        } else {
-                          currentVal.add(value);
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _OverlayBuilder(
+                  overlayPortalController: widget.overlayController,
+                  visibility: widget.visibility,
+                  overlay: (size, hideCallback) {
+                    return _DropdownOverlay<T>(
+                      onItemSelect: (T value) {
+                        switch (widget._dropdownType) {
+                          case _DropdownType.singleSelect:
+                            selectedItemNotifier.value = value;
+                          case _DropdownType.multipleSelect:
+                            final currentVal = selectedItemsNotifier.value.toList();
+                            if (currentVal.contains(value)) {
+                              currentVal.remove(value);
+                            } else {
+                              currentVal.add(value);
+                            }
+                            selectedItemsNotifier.value = currentVal;
                         }
-                        selectedItemsNotifier.value = currentVal;
-                    }
+                      },
+                      noResultFoundText: widget.noResultFoundText ?? 'No result found.',
+                      noResultFoundBuilder: widget.noResultFoundBuilder,
+                      items: widget.items ?? [],
+                      itemsScrollCtrl: widget.itemsScrollController,
+                      selectedItemNotifier: selectedItemNotifier,
+                      selectedItemsNotifier: selectedItemsNotifier,
+                      size: size,
+                      listItemBuilder: widget.listItemBuilder,
+                      layerLink: layerLink,
+                      hideOverlay: hideCallback,
+                      hintStyle: decoration?.hintStyle,
+                      headerStyle: decoration?.headerStyle,
+                      noResultFoundStyle: decoration?.noResultFoundStyle,
+                      listItemStyle: decoration?.listItemStyle,
+                      headerBuilder: widget.headerBuilder,
+                      headerListBuilder: widget.headerListBuilder,
+                      hintText: safeHintText,
+                      searchHintText: widget.searchHintText ?? 'Search',
+                      hintBuilder: widget.hintBuilder,
+                      decoration: decoration,
+                      overlayHeight: widget.overlayHeight,
+                      excludeSelected: widget.excludeSelected,
+                      canCloseOutsideBounds: widget.canCloseOutsideBounds,
+                      searchType: widget._searchType,
+                      futureRequest: widget.futureRequest,
+                      futureRequestDelay: widget.futureRequestDelay,
+                      hideSelectedFieldWhenOpen: widget.hideSelectedFieldWhenExpanded,
+                      maxLines: widget.maxlines,
+                      headerPadding: widget.expandedHeaderPadding,
+                      itemsListPadding: widget.itemsListPadding,
+                      listItemPadding: widget.listItemPadding,
+                      searchRequestLoadingIndicator: widget.searchRequestLoadingIndicator,
+                      dropdownType: widget._dropdownType,
+                    );
                   },
-                  noResultFoundText:
-                      widget.noResultFoundText ?? 'No result found.',
-                  noResultFoundBuilder: widget.noResultFoundBuilder,
-                  items: widget.items ?? [],
-                  itemsScrollCtrl: widget.itemsScrollController,
-                  selectedItemNotifier: selectedItemNotifier,
-                  selectedItemsNotifier: selectedItemsNotifier,
-                  size: size,
-                  listItemBuilder: widget.listItemBuilder,
-                  layerLink: layerLink,
-                  hideOverlay: hideCallback,
-                  hintStyle: decoration?.hintStyle,
-                  headerStyle: decoration?.headerStyle,
-                  noResultFoundStyle: decoration?.noResultFoundStyle,
-                  listItemStyle: decoration?.listItemStyle,
-                  headerBuilder: widget.headerBuilder,
-                  headerListBuilder: widget.headerListBuilder,
-                  hintText: safeHintText,
-                  searchHintText: widget.searchHintText ?? 'Search',
-                  hintBuilder: widget.hintBuilder,
-                  decoration: decoration,
-                  overlayHeight: widget.overlayHeight,
-                  excludeSelected: widget.excludeSelected,
-                  canCloseOutsideBounds: widget.canCloseOutsideBounds,
-                  searchType: widget._searchType,
-                  futureRequest: widget.futureRequest,
-                  futureRequestDelay: widget.futureRequestDelay,
-                  hideSelectedFieldWhenOpen:
-                      widget.hideSelectedFieldWhenExpanded,
-                  maxLines: widget.maxlines,
-                  headerPadding: widget.expandedHeaderPadding,
-                  itemsListPadding: widget.itemsListPadding,
-                  listItemPadding: widget.listItemPadding,
-                  searchRequestLoadingIndicator:
-                      widget.searchRequestLoadingIndicator,
-                  dropdownType: widget._dropdownType,
-                );
-              },
-              child: (showCallback) {
-                return CompositedTransformTarget(
-                  link: layerLink,
-                  child: _DropDownField<T>(
-                    onTap: showCallback,
-                    selectedItemNotifier: selectedItemNotifier,
-                    border: formFieldState.hasError
-                        ? (decoration?.closedErrorBorder ?? _defaultErrorBorder)
-                        : enabled
+                  child: (showCallback) {
+                    return CompositedTransformTarget(
+                      link: layerLink,
+                      child: _DropDownField<T>(
+                        onTap: showCallback,
+                        selectedItemNotifier: selectedItemNotifier,
+                        border: formFieldState.hasError
+                            ? (decoration?.closedErrorBorder ?? _defaultErrorBorder)
+                            : enabled
                             ? decoration?.closedBorder
                             : disabledDecoration?.border,
-                    borderRadius: formFieldState.hasError
-                        ? decoration?.closedErrorBorderRadius
-                        : enabled
+                        borderRadius: formFieldState.hasError
+                            ? decoration?.closedErrorBorderRadius
+                            : enabled
                             ? decoration?.closedBorderRadius
                             : disabledDecoration?.borderRadius,
-                    shadow: enabled
-                        ? decoration?.closedShadow
-                        : disabledDecoration?.shadow,
-                    hintStyle: enabled
-                        ? decoration?.hintStyle
-                        : disabledDecoration?.hintStyle,
-                    headerStyle: enabled
-                        ? decoration?.headerStyle
-                        : disabledDecoration?.headerStyle,
-                    hintText: safeHintText,
-                    hintBuilder: widget.hintBuilder,
-                    headerBuilder: widget.headerBuilder,
-                    headerListBuilder: widget.headerListBuilder,
-                    prefixIcon: enabled
-                        ? decoration?.prefixIcon
-                        : disabledDecoration?.prefixIcon,
-                    suffixIcon: enabled
-                        ? decoration?.closedSuffixIcon
-                        : disabledDecoration?.suffixIcon,
-                    fillColor: enabled
-                        ? decoration?.closedFillColor
-                        : disabledDecoration?.fillColor,
-                    maxLines: widget.maxlines,
-                    headerPadding: widget.closedHeaderPadding,
-                    dropdownType: widget._dropdownType,
-                    selectedItemsNotifier: selectedItemsNotifier,
-                    enabled: widget.enabled,
-                  ),
-                );
-              },
+                        shadow: enabled
+                            ? decoration?.closedShadow
+                            : disabledDecoration?.shadow,
+                        hintStyle: enabled
+                            ? decoration?.hintStyle
+                            : disabledDecoration?.hintStyle,
+                        headerStyle: enabled
+                            ? decoration?.headerStyle
+                            : disabledDecoration?.headerStyle,
+                        hintText: safeHintText,
+                        hintBuilder: widget.hintBuilder,
+                        headerBuilder: widget.headerBuilder,
+                        headerListBuilder: widget.headerListBuilder,
+                        prefixIcon: enabled
+                            ? decoration?.prefixIcon
+                            : disabledDecoration?.prefixIcon,
+                        suffixIcon: enabled
+                            ? decoration?.closedSuffixIcon
+                            : disabledDecoration?.suffixIcon,
+                        fillColor: enabled
+                            ? decoration?.closedFillColor
+                            : disabledDecoration?.fillColor,
+                        maxLines: widget.maxlines,
+                        headerPadding: widget.closedHeaderPadding,
+                        dropdownType: widget._dropdownType,
+                        selectedItemsNotifier: selectedItemsNotifier,
+                        enabled: widget.enabled,
+                      ),
+                    );
+                  },
+                ),
+                if (formFieldState.hasError)
+                  const SizedBox(height: 8)
+              ],
             ),
           );
         },
