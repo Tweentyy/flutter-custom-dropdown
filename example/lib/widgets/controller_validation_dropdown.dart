@@ -25,7 +25,7 @@ class _ControllerValidationDropdownState
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown(
+          CustomDropdown<CustomDropDownItem>(
             controller: controller,
             hintText: 'Select job role',
             items: jobItems,

@@ -18,7 +18,7 @@ class SearchRequestDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.searchRequest(
+    return CustomDropdown<CustomDropDownItem>.searchRequest(
       futureRequest: _getFakeRequestData,
       hintText: 'Search job role',
       onChanged: (value) {
@@ -39,7 +39,7 @@ class MultiSelectSearchRequestDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.multiSelectSearchRequest(
+    return CustomDropdown<CustomDropDownItem>.multiSelectSearchRequest(
       futureRequest: _getFakeRequestData,
       hintText: 'Search job role',
       onListChanged: (value) {

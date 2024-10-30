@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:animated_custom_dropdown_example/models/job.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +11,7 @@ class DecoratedDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.search(
+    return CustomDropdown<CustomDropDownItem>.search(
       items: jobItems,
       initialItem: jobItems[2],
       hintText: 'Select job role',
@@ -98,7 +99,7 @@ class MultiSelectDecoratedDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.multiSelectSearch(
+    return CustomDropdown<CustomDropDownItem>.multiSelectSearch(
       items: jobItems,
       hintText: 'Select job role',
       searchHintText: 'Search job role',

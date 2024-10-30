@@ -25,7 +25,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.search(
+    return CustomDropdown<CustomDropDownItem>.search(
       hintText: 'Select cuisines',
       items: _list,
       initialItem: selectedItem,
@@ -45,7 +45,7 @@ class MultiSelectSearchDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown.multiSelectSearch(
+    return CustomDropdown<CustomDropDownItem>.multiSelectSearch(
       hintText: 'Select cuisines',
       items: _list,
       onListChanged: (value) {

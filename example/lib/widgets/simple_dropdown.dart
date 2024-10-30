@@ -16,10 +16,10 @@ class SimpleDropdown extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomDropdown(
+    return CustomDropdown<CustomDropDownItem>(
       hintText: 'Select job role',
       items: _list,
-      initialItem: _list[0],
+      initialItem: null,
       excludeSelected: false,
       onChanged: (value) {
         log('SimpleDropdown onChanged value: ${value?.label}');

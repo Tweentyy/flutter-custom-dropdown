@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:animated_custom_dropdown/custom_dropdown.dart';
+import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:animated_custom_dropdown_example/models/job.dart';
 import 'package:flutter/material.dart';
 
@@ -16,7 +17,7 @@ class ValidationDropdown extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown(
+          CustomDropdown<CustomDropDownItem>(
             hintText: 'Select job role',
             items: jobItems,
             excludeSelected: false,
@@ -63,7 +64,7 @@ class MultiSelectValidationDropdown extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          CustomDropdown.multiSelect(
+          CustomDropdown<CustomDropDownItem>.multiSelect(
             hintText: 'Select job role',
             items: jobItems,
             onListChanged: (value) {
