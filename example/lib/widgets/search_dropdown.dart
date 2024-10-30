@@ -14,7 +14,7 @@ List<CustomDropDownItem> _list = [
 ];
 
 class SearchDropdown extends StatefulWidget {
-  const SearchDropdown({Key? key}) : super(key: key);
+  const SearchDropdown({super.key});
 
   @override
   State<SearchDropdown> createState() => _SearchDropdownState();
@@ -41,7 +41,7 @@ class _SearchDropdownState extends State<SearchDropdown> {
 }
 
 class MultiSelectSearchDropdown extends StatelessWidget {
-  const MultiSelectSearchDropdown({Key? key}) : super(key: key);
+  const MultiSelectSearchDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {

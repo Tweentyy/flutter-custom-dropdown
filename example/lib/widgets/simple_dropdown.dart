@@ -5,14 +5,14 @@ import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 
 List<CustomDropDownItem> _list = [
-  CustomDropDownItem(value: 'Developer', label: 'Developer', icon: Icons.developer_mode),
-  CustomDropDownItem(value: 'Designer', label: 'Designer', icon: null),
-  CustomDropDownItem(value: 'Consultant', label: 'Consultant', icon: null),
-  CustomDropDownItem(value: 'Student', label: 'Student', icon: Icons.school),
+  CustomDropDownItem(value: 'developer', label: 'Developer', icon: Icons.developer_mode),
+  CustomDropDownItem(value: 'designer', label: 'Designer'),
+  CustomDropDownItem(value: 'consultant', label: 'Consultant'),
+  CustomDropDownItem(value: 'student', label: 'Student', icon: Icons.school),
 ];
 
 class SimpleDropdown extends StatelessWidget {
-  const SimpleDropdown({Key? key}) : super(key: key);
+  const SimpleDropdown({super.key});
 
   @override
   Widget build(BuildContext context) {
