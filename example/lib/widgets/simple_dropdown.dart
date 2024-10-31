@@ -21,9 +21,34 @@ class SimpleDropdown extends StatelessWidget {
       items: _list,
       initialItem: null,
       excludeSelected: false,
+      overlayController: OverlayPortalController(),
       onChanged: (value) {
         log('SimpleDropdown onChanged value: ${value?.label}');
       },
+      decoration: CustomDropdownDecoration(
+        closedSuffixIcon: const Icon(Icons.keyboard_arrow_down),
+        expandedSuffixIcon: const Icon(Icons.keyboard_arrow_up),
+        closedBorder: Border.all(color: Colors.red),
+        closedBorderRadius: BorderRadius.circular(8),
+        closedClickedBorder: Border(
+            top: BorderSide(color: Colors.blue),
+            left: BorderSide(color: Colors.blue),
+            right: BorderSide(color: Colors.blue)
+        ),
+        closedClickedBorderRadius: BorderRadius.only(
+          topLeft: Radius.circular(8),
+          topRight: Radius.circular(8),
+        ),
+        expandedBorder: Border(
+            bottom: BorderSide(color: Colors.green),
+            left: BorderSide(color: Colors.green),
+            right: BorderSide(color: Colors.green)
+        ),
+        expandedBorderRadius: BorderRadius.only(
+          bottomLeft: Radius.circular(8),
+          bottomRight: Radius.circular(8),
+        ),
+      ),
     );
   }
 }

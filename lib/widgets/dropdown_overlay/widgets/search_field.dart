@@ -47,8 +47,7 @@ class _SearchFieldState<T extends CustomDropDownItem> extends State<_SearchField
   @override
   void initState() {
     super.initState();
-    if (widget.searchType == _SearchType.onRequestData &&
-        widget.items.isEmpty) {
+    if (widget.searchType == _SearchType.onRequestData && widget.items.isEmpty) {
       focusNode.requestFocus();
     }
   }
@@ -110,9 +109,7 @@ class _SearchFieldState<T extends CustomDropDownItem> extends State<_SearchField
             isFieldEmpty = false;
           }
 
-          if (widget.searchType != null &&
-              widget.searchType == _SearchType.onRequestData &&
-              val.isNotEmpty) {
+          if (widget.searchType != null && widget.searchType == _SearchType.onRequestData && val.isNotEmpty) {
             widget.onFutureRequestLoading!(true);
 
             if (widget.futureRequestDelay != null) {
@@ -133,16 +130,12 @@ class _SearchFieldState<T extends CustomDropDownItem> extends State<_SearchField
         controller: searchCtrl,
         decoration: InputDecoration(
           filled: true,
-          fillColor: widget.decoration?.fillColor ??
-              SearchFieldDecoration._defaultFillColor,
-          constraints: widget.decoration?.constraints ??
-              const BoxConstraints.tightFor(height: 40),
-          contentPadding:
-              widget.decoration?.contentPadding ?? const EdgeInsets.all(8),
+          fillColor: widget.decoration?.fillColor ?? SearchFieldDecoration._defaultFillColor,
+          constraints: widget.decoration?.constraints ?? const BoxConstraints.tightFor(height: 40),
+          contentPadding: widget.decoration?.contentPadding ?? const EdgeInsets.all(8),
           hintText: widget.searchHintText,
           hintStyle: widget.decoration?.hintStyle,
-          prefixIcon: widget.decoration?.prefixIcon ??
-              const Icon(Icons.search, size: 22),
+          prefixIcon: widget.decoration?.prefixIcon ?? const Icon(Icons.search, size: 22),
           suffixIcon: widget.decoration?.suffixIcon?.call(onClear) ??
               GestureDetector(
                 onTap: onClear,

@@ -23,8 +23,7 @@ class _OverlayBuilderState extends State<_OverlayBuilder> {
   @override
   void initState() {
     super.initState();
-    overlayController =
-        widget.overlayPortalController ?? OverlayPortalController();
+    overlayController = widget.overlayPortalController ?? OverlayPortalController();
   }
 
   void showOverlay() {

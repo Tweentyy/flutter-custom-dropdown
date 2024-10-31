@@ -510,6 +510,7 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
   late SingleSelectController<T?> selectedItemNotifier;
   late MultiSelectController<T> selectedItemsNotifier;
   FormFieldState<(T?, List<T>)>? _formFieldState;
+  bool isOpened = false;
 
   void _selectedItemListener() {
     widget.onChanged?.call(selectedItemNotifier.value);
@@ -531,14 +532,10 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
   void initState() {
     super.initState();
 
-    selectedItemNotifier =
-        widget.controller ?? SingleSelectController(widget.initialItem);
-
-    selectedItemsNotifier = widget.multiSelectController ??
-        MultiSelectController(widget.initialItems ?? []);
+    selectedItemNotifier = widget.controller ?? SingleSelectController(widget.initialItem);
+    selectedItemsNotifier = widget.multiSelectController ?? MultiSelectController(widget.initialItems ?? []);
 
     selectedItemNotifier.addListener(_selectedItemListener);
-
     selectedItemsNotifier.addListener(_selectedItemsListener);
   }
 
@@ -546,27 +543,23 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
   void didUpdateWidget(covariant CustomDropdown<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    if (widget.initialItem != oldWidget.initialItem &&
-        selectedItemNotifier.value != widget.initialItem) {
+    if (widget.initialItem != oldWidget.initialItem && selectedItemNotifier.value != widget.initialItem) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         selectedItemNotifier.value = widget.initialItem;
       });
     }
 
-    if (widget.initialItems != oldWidget.initialItems &&
-        selectedItemsNotifier.value != widget.initialItems) {
+    if (widget.initialItems != oldWidget.initialItems && selectedItemsNotifier.value != widget.initialItems) {
       SchedulerBinding.instance.addPostFrameCallback((_) {
         selectedItemsNotifier.value = widget.initialItems ?? [];
       });
     }
 
-    if (widget.controller != oldWidget.controller &&
-        widget.controller != null) {
+    if (widget.controller != oldWidget.controller && widget.controller != null) {
       selectedItemNotifier = widget.controller!;
     }
 
-    if (widget.multiSelectController != oldWidget.multiSelectController &&
-        widget.multiSelectController != null) {
+    if (widget.multiSelectController != oldWidget.multiSelectController && widget.multiSelectController != null) {
       selectedItemsNotifier = widget.multiSelectController!;
     }
   }
@@ -588,6 +581,15 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
     super.dispose();
   }
 
+  void _updateVisibility(bool isVisible) {
+    setState(() {
+      isOpened = isVisible;
+    });
+    if (widget.visibility != null) {
+      widget.visibility!(isVisible);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final enabled = widget.enabled;
@@ -600,12 +602,10 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
       child: FormField<(T?, List<T>)>(
         initialValue: (selectedItemNotifier.value, selectedItemsNotifier.value),
         validator: (val) {
-          if (widget._dropdownType == _DropdownType.singleSelect &&
-              widget.validator != null) {
+          if (widget._dropdownType == _DropdownType.singleSelect && widget.validator != null) {
             return widget.validator!(val?.$1);
           }
-          if (widget._dropdownType == _DropdownType.multipleSelect &&
-              widget.listValidator != null) {
+          if (widget._dropdownType == _DropdownType.multipleSelect && widget.listValidator != null) {
             return widget.listValidator!(val?.$2 ?? []);
           }
           return null;
@@ -624,7 +624,7 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
               children: [
                 _OverlayBuilder(
                   overlayPortalController: widget.overlayController,
-                  visibility: widget.visibility,
+                  visibility: widget.visibility ?? _updateVisibility,
                   overlay: (size, hideCallback) {
                     return _DropdownOverlay<T>(
                       onItemSelect: (T value) {
@@ -684,13 +684,17 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
                         selectedItemNotifier: selectedItemNotifier,
                         border: formFieldState.hasError
                             ? (decoration?.closedErrorBorder ?? _defaultErrorBorder)
-                            : enabled
+                            : enabled && isOpened == false
                             ? decoration?.closedBorder
+                            : enabled && isOpened == true
+                            ? decoration?.closedClickedBorder
                             : disabledDecoration?.border,
                         borderRadius: formFieldState.hasError
                             ? decoration?.closedErrorBorderRadius
-                            : enabled
+                            : enabled && isOpened == false
                             ? decoration?.closedBorderRadius
+                            : enabled && isOpened == true
+                            ? decoration?.closedClickedBorderRadius
                             : disabledDecoration?.borderRadius,
                         shadow: enabled
                             ? decoration?.closedShadow

@@ -38,6 +38,12 @@ class CustomDropdownDecoration {
   /// Error border radius for closed state of [CustomDropdown].
   final BorderRadius? closedErrorBorderRadius;
 
+  /// Clicked border for closed state of [CustomDropdown].
+  final BoxBorder? closedClickedBorder;
+
+  /// Clicked border radius for closed state of [CustomDropdown].
+  final BorderRadius? closedClickedBorderRadius;
+
   /// Border for opened/expanded state of [CustomDropdown].
   final BoxBorder? expandedBorder;
 
@@ -80,6 +86,8 @@ class CustomDropdownDecoration {
     this.closedBorderRadius,
     this.closedErrorBorder,
     this.closedErrorBorderRadius,
+    this.closedClickedBorder,
+    this.closedClickedBorderRadius,
     this.expandedBorder,
     this.expandedBorderRadius,
     this.hintStyle,
