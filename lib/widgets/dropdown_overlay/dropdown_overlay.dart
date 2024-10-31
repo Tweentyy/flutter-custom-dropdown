@@ -290,38 +290,37 @@ class _DropdownOverlayState<T extends CustomDropDownItem> extends State<_Dropdow
                             crossAxisAlignment: CrossAxisAlignment.start,
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              if (onSearch &&
-                                  widget.searchType == _SearchType.onListData)
-                                _SearchField<T>.forListData(
-                                  items: widget.items,
-                                  searchHintText: widget.searchHintText,
-                                  onSearchedItems: (val) {
-                                    setState(() => items = val);
-                                  },
-                                  decoration:
-                                  decoration?.searchFieldDecoration,
+                              if (onSearch && widget.searchType == _SearchType.onListData)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 16.0),
+                                  child: _SearchField<T>.forListData(
+                                    items: widget.items,
+                                    searchHintText: widget.searchHintText,
+                                    onSearchedItems: (val) {
+                                      setState(() => items = val);
+                                    },
+                                    decoration: decoration?.searchFieldDecoration,
+                                  ),
                                 )
-                              else if (onSearch &&
-                                  widget.searchType ==
-                                      _SearchType.onRequestData)
-                                _SearchField<T>.forRequestData(
-                                  items: widget.items,
-                                  searchHintText: widget.searchHintText,
-                                  onFutureRequestLoading: (val) {
-                                    setState(() {
-                                      isSearchRequestLoading = val;
-                                    });
-                                  },
-                                  futureRequest: widget.futureRequest,
-                                  futureRequestDelay:
-                                  widget.futureRequestDelay,
-                                  onSearchedItems: (val) {
-                                    setState(() => items = val);
-                                  },
-                                  mayFoundResult: (val) =>
-                                  mayFoundSearchRequestResult = val,
-                                  decoration:
-                                  decoration?.searchFieldDecoration,
+                              else if (onSearch && widget.searchType == _SearchType.onRequestData)
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 8.0),
+                                  child: _SearchField<T>.forRequestData(
+                                    items: widget.items,
+                                    searchHintText: widget.searchHintText,
+                                    onFutureRequestLoading: (val) {
+                                      setState(() {
+                                        isSearchRequestLoading = val;
+                                      });
+                                    },
+                                    futureRequest: widget.futureRequest,
+                                    futureRequestDelay: widget.futureRequestDelay,
+                                    onSearchedItems: (val) {
+                                      setState(() => items = val);
+                                    },
+                                    mayFoundResult: (val) => mayFoundSearchRequestResult = val,
+                                    decoration: decoration?.searchFieldDecoration,
+                                  ),
                                 ),
                               if (isSearchRequestLoading)
                                 widget.searchRequestLoadingIndicator ??
