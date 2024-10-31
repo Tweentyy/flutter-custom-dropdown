@@ -39,7 +39,7 @@ class _ControllerValidationDropdownState
               return null;
             },
             decoration: CustomDropdownDecoration(
-              closedSuffixIcon: InkWell(
+              suffixIconClosed: InkWell(
                 onTap: () {
                   log('Clearing ControllerValidationDropdown');
                   controller.clear();

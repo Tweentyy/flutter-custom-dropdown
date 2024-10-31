@@ -18,13 +18,16 @@ class CustomDropdownDecoration {
   final List<BoxShadow>? expandedShadow;
 
   /// Suffix icon for closed state of [CustomDropdown].
-  final Widget? closedSuffixIcon;
+  final Widget? suffixIconClosed;
+
+  /// Prefix icon for closed state of [CustomDropdown].
+  final Widget? prefixIconClosed;
 
   /// Suffix icon for opened/expanded state of [CustomDropdown].
-  final Widget? expandedSuffixIcon;
+  final Widget? suffixIconExpanded;
 
-  /// [CustomDropdown] header prefix icon.
-  final Widget? prefixIcon;
+  /// Prefix icon for opened/expanded state of [CustomDropdown].
+  final Widget? prefixIconExpanded;
 
   /// Border for closed state of [CustomDropdown].
   final BoxBorder? closedBorder;
@@ -79,9 +82,10 @@ class CustomDropdownDecoration {
     this.expandedFillColor,
     this.closedShadow,
     this.expandedShadow,
-    this.closedSuffixIcon,
-    this.expandedSuffixIcon,
-    this.prefixIcon,
+    this.suffixIconClosed,
+    this.prefixIconClosed,
+    this.suffixIconExpanded,
+    this.prefixIconExpanded,
     this.closedBorder,
     this.closedBorderRadius,
     this.closedErrorBorder,

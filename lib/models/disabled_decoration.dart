@@ -9,11 +9,17 @@ class CustomDropdownDisabledDecoration {
   /// [CustomDropdown] box shadow (disabled state).
   final List<BoxShadow>? shadow;
 
-  /// Suffix icon for disabled state of [CustomDropdown].
-  final Widget? suffixIcon;
+  /// Suffix icon for disabled and closed state of [CustomDropdown].
+  final Widget? suffixIconClosed;
 
-  /// Prefix icon for disabled state of [CustomDropdown].
-  final Widget? prefixIcon;
+  /// Prefix icon for disabled and closed state of [CustomDropdown].
+  final Widget? prefixIconClosed;
+
+  /// Suffix icon for disable and opened/expanded state of [CustomDropdown].
+  final Widget? suffixIconExpanded;
+
+  /// Prefix icon for disable and opened/expanded state of [CustomDropdown].
+  final Widget? prefixIconExpanded;
 
   /// Border for disabled state of [CustomDropdown].
   final BoxBorder? border;
@@ -30,8 +36,10 @@ class CustomDropdownDisabledDecoration {
   const CustomDropdownDisabledDecoration({
     this.fillColor,
     this.shadow,
-    this.suffixIcon,
-    this.prefixIcon,
+    this.suffixIconClosed,
+    this.prefixIconClosed,
+    this.suffixIconExpanded,
+    this.prefixIconExpanded,
     this.border,
     this.borderRadius,
     this.headerStyle,

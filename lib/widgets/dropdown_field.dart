@@ -1,20 +1,35 @@
 part of '../custom_dropdown.dart';
 
 // overlay icon
+const _defaultOverlayIconUp = Icon(
+  Icons.keyboard_arrow_up_rounded,
+  size: 20,
+);
+final _defaultOverlayIconUpDisabled = Icon(
+  Icons.keyboard_arrow_up_rounded,
+  size: 20,
+  color: Colors.black.withOpacity(.5)
+);
 const _defaultOverlayIconDown = Icon(
   Icons.keyboard_arrow_down_rounded,
   size: 20,
 );
+final _defaultOverlayIconDownDisabled = Icon(
+    Icons.keyboard_arrow_down_rounded,
+    size: 20,
+    color: Colors.black.withOpacity(.5)
+);
 
 class _DropDownField<T extends CustomDropDownItem> extends StatefulWidget {
   final VoidCallback onTap;
+  final bool isOpened;
   final SingleSelectController<T?> selectedItemNotifier;
   final String hintText;
   final Color? fillColor;
   final BoxBorder? border;
   final BorderRadius? borderRadius;
   final TextStyle? headerStyle, hintStyle;
-  final Widget? prefixIcon, suffixIcon;
+  final Widget? prefixIconClosed, suffixIconClosed, prefixIconOpened, suffixIconOpened;
   final List<BoxShadow>? shadow;
   final EdgeInsets? headerPadding;
   final int maxLines;
@@ -28,6 +43,7 @@ class _DropDownField<T extends CustomDropDownItem> extends StatefulWidget {
   const _DropDownField({
     super.key,
     required this.onTap,
+    required this.isOpened,
     required this.selectedItemNotifier,
     required this.maxLines,
     required this.dropdownType,
@@ -42,8 +58,10 @@ class _DropDownField<T extends CustomDropDownItem> extends StatefulWidget {
     this.shadow,
     this.headerListBuilder,
     this.hintBuilder,
-    this.prefixIcon,
-    this.suffixIcon,
+    this.prefixIconClosed,
+    this.suffixIconClosed,
+    this.prefixIconOpened,
+    this.suffixIconOpened,
     this.headerPadding,
     this.enabled = true,
   });
@@ -118,6 +136,26 @@ class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownF
     );
   }
 
+  Widget defaultPrefixOverlayIcon() {
+    if (widget.isOpened) {
+      return widget.prefixIconOpened!;
+    } else {
+      return widget.prefixIconClosed!;
+    }
+  }
+
+  Widget defaultSuffixOverlayIcon() {
+    if (widget.isOpened) {
+      return widget.enabled
+          ? (widget.suffixIconOpened ?? _defaultOverlayIconUp)
+          : (widget.suffixIconOpened ?? _defaultOverlayIconUpDisabled);
+    } else {
+      return widget.enabled
+          ? (widget.suffixIconClosed ?? _defaultOverlayIconDown)
+          : (widget.suffixIconClosed ?? _defaultOverlayIconDownDisabled);
+    }
+  }
+
   @override
   void didUpdateWidget(covariant _DropDownField<T> oldWidget) {
     super.didUpdateWidget(oldWidget);
@@ -146,8 +184,8 @@ class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownF
         ),
         child: Row(
           children: [
-            if (widget.prefixIcon != null) ...[
-              widget.prefixIcon!,
+            if (widget.prefixIconClosed != null || widget.prefixIconOpened != null) ...[
+              defaultPrefixOverlayIcon(),
               const SizedBox(width: 12),
             ],
             Expanded(
@@ -161,14 +199,7 @@ class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownF
               },
             ),
             const SizedBox(width: 12),
-            widget.suffixIcon ??
-                (widget.enabled
-                    ? _defaultOverlayIconDown
-                    : Icon(
-                        Icons.keyboard_arrow_down_rounded,
-                        color: Colors.black.withOpacity(.5),
-                        size: 20,
-                      )),
+            defaultSuffixOverlayIcon(),
           ],
         ),
       ),

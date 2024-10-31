@@ -33,14 +33,14 @@ class _MultiSelectControllerDropdownState
           hintText: 'Select job role',
           items: jobItems,
           decoration: CustomDropdownDecoration(
-            closedSuffixIcon: InkWell(
+            suffixIconClosed: InkWell(
               onTap: () {
                 log('Clearing MultiSelectControllerDropdown');
                 controller.clear();
               },
               child: const Icon(Icons.close),
             ),
-            expandedSuffixIcon: InkWell(
+            suffixIconExpanded: InkWell(
               onTap: () {
                 log('Clearing MultiSelectControllerDropdown');
                 controller.clear();

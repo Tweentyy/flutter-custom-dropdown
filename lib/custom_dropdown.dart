@@ -681,6 +681,7 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
                       link: layerLink,
                       child: _DropDownField<T>(
                         onTap: showCallback,
+                        isOpened: isOpened,
                         selectedItemNotifier: selectedItemNotifier,
                         border: formFieldState.hasError
                             ? (decoration?.closedErrorBorder ?? _defaultErrorBorder)
@@ -709,12 +710,18 @@ class _CustomDropdownState<T extends CustomDropDownItem> extends State<CustomDro
                         hintBuilder: widget.hintBuilder,
                         headerBuilder: widget.headerBuilder,
                         headerListBuilder: widget.headerListBuilder,
-                        prefixIcon: enabled
-                            ? decoration?.prefixIcon
-                            : disabledDecoration?.prefixIcon,
-                        suffixIcon: enabled
-                            ? decoration?.closedSuffixIcon
-                            : disabledDecoration?.suffixIcon,
+                        prefixIconClosed: enabled
+                            ? decoration?.prefixIconClosed
+                            : disabledDecoration?.prefixIconClosed,
+                        suffixIconClosed: enabled
+                            ? decoration?.suffixIconClosed
+                            : disabledDecoration?.suffixIconClosed,
+                        prefixIconOpened: enabled
+                            ? decoration?.prefixIconExpanded
+                            : disabledDecoration?.prefixIconExpanded,
+                        suffixIconOpened: enabled
+                            ? decoration?.suffixIconExpanded
+                            : disabledDecoration?.suffixIconExpanded,
                         fillColor: enabled
                             ? decoration?.closedFillColor
                             : disabledDecoration?.fillColor,

@@ -26,8 +26,8 @@ class SimpleDropdown extends StatelessWidget {
         log('SimpleDropdown onChanged value: ${value?.label}');
       },
       decoration: CustomDropdownDecoration(
-        closedSuffixIcon: const Icon(Icons.keyboard_arrow_down),
-        expandedSuffixIcon: const Icon(Icons.keyboard_arrow_up),
+        suffixIconClosed: const Icon(Icons.keyboard_arrow_down),
+        suffixIconExpanded: const Icon(Icons.keyboard_arrow_up),
         closedBorder: Border.all(color: Colors.red),
         closedBorderRadius: BorderRadius.circular(8),
         closedClickedBorder: Border(
