@@ -103,7 +103,7 @@ class _DropdownOverlayState<T extends CustomDropDownItem> extends State<_Dropdow
           child: Row(
             children: [
               if (result.icon != null) ...[
-                Icon(result.icon),
+                result.icon!,
                 const SizedBox(width: 8),
               ],
               Expanded(

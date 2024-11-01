@@ -103,7 +103,7 @@ class _DropDownFieldState<T extends CustomDropDownItem> extends State<_DropDownF
     return Row(
       children: [
         if (oneItem?.icon != null) ...[
-          Icon(oneItem!.icon),
+          oneItem!.icon!,
           const SizedBox(width: 8),
         ],
         Expanded(

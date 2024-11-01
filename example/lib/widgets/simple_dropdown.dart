@@ -5,10 +5,10 @@ import 'package:animated_custom_dropdown/models/custom_drop_down_item.dart';
 import 'package:flutter/material.dart';
 
 List<CustomDropDownItem> _list = [
-  CustomDropDownItem(value: 'developer', label: 'Developer', icon: Icons.developer_mode),
+  CustomDropDownItem(value: 'developer', label: 'Developer', icon: Icon(Icons.developer_mode)),
   CustomDropDownItem(value: 'designer', label: 'Designer'),
   CustomDropDownItem(value: 'consultant', label: 'Consultant'),
-  CustomDropDownItem(value: 'student', label: 'Student', icon: Icons.school),
+  CustomDropDownItem(value: 'student', label: 'Student', icon: Icon(Icons.school)),
 ];
 
 class SimpleDropdown extends StatelessWidget {
