@@ -33,10 +33,13 @@ class _AnimatedSectionState extends State<_AnimatedSection>
     animController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 300),
-    )..addStatusListener((status) {
-        if (status == AnimationStatus.dismissed) {
-          widget.animationDismissed();
-        }
+    )
+      ..addStatusListener((status) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          if (status == AnimationStatus.dismissed) {
+            widget.animationDismissed();
+          }
+        });
       });
 
     animation = CurvedAnimation(
