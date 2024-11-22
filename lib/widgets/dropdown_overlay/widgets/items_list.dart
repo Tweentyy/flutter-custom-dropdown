@@ -38,8 +38,8 @@ class _ItemsList<T extends CustomDropDownItem> extends StatelessWidget {
         itemBuilder: (_, index) {
           final selected = switch (dropdownType) {
             _DropdownType.singleSelect =>
-              !excludeSelected && selectedItem == items[index],
-            _DropdownType.multipleSelect => selectedItems.contains(items[index])
+              !excludeSelected && selectedItem?.value == items[index].value,
+            _DropdownType.multipleSelect => selectedItems.map((item) => item.value).contains(items[index].value)
           };
           return Material(
             color: Colors.transparent,
